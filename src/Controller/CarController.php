@@ -21,6 +21,16 @@ class CarController extends AbstractController
         ]);
     }
 
+    #[Route('/detailCar/{id}', name: 'detailCar')]
+    public function detailCar(CarRepository $repository, $id): Response
+    {
+        $car = $repository->find($id);
+        return $this->render('car/detailCar.html.twig', [
+            'controller_name' => 'CarController',
+            'car' => $car,
+        ]);
+    }
+
     #[Route('/deleteCar/{id}', name: 'deleteCar')]
     public function deleteCar(EntityManagerInterface $manager, $id): Response
     {
@@ -28,6 +38,12 @@ class CarController extends AbstractController
         $car = $repo->find($id);
         $manager->remove($car);
         $manager->flush();
+        return $this->redirectToRoute('home');
+    }
+
+    #[Route('/createCar', name: 'createCar')]
+    public function createCar(EntityManagerInterface $manager): Response
+    {
         return $this->redirectToRoute('home');
     }
 }
