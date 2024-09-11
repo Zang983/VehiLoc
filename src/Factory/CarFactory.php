@@ -39,7 +39,7 @@ final class CarFactory extends PersistentProxyObjectFactory{
             'daily_price' => self::faker()->randomFloat(2,10,60),
             'monthly_price' => self::faker()->randomFloat(),
             'description' => self::faker()->text(),
-            'name' => self::faker()->text(255),
+            'name' => self::faker()->text(15),
             'transmission' => self::faker()->boolean(),
         ];
     }
