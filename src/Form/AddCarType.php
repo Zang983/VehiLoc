@@ -28,8 +28,8 @@ class AddCarType extends AbstractType
             ])
             ->add('transmission', ChoiceType::class, [
                 'choices' => [
-                    'Manuelle' => 'Manuelle',
-                    'Automatique' => 'Automatique',
+                    'Manuelle' => 0,
+                    'Automatique' => 1,
                 ],
                 'label' => 'Transmission',
 

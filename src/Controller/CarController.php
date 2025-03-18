@@ -24,9 +24,8 @@ class CarController extends AbstractController
     }
 
     #[Route('/detailCar/{id}', name: 'detailCar')]
-    public function detailCar(CarRepository $repository, $id): Response
+    public function detailCar(CarRepository $repository, Car $car ): Response
     {
-        $car = $repository->find($id);
         if(!$car){
             return $this->redirectToRoute('home');
         }
