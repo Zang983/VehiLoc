@@ -32,6 +32,9 @@ class Car
     #[ORM\Column]
     private ?int $capacity = null;
 
+    #[ORM\Column(length: 40, nullable: true)]
+    private ?string $brand = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +108,18 @@ class Car
     public function setCapacity(int $capacity): static
     {
         $this->capacity = $capacity;
+
+        return $this;
+    }
+
+    public function getBrand(): ?string
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(?string $brand): static
+    {
+        $this->brand = $brand;
 
         return $this;
     }
