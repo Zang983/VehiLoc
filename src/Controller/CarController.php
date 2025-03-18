@@ -24,9 +24,9 @@ class CarController extends AbstractController
     }
 
     #[Route('/detailCar/{id}', name: 'detailCar')]
-    public function detailCar(CarRepository $repository, Car $car ): Response
+    public function detailCar(CarRepository $repository, Car $car = null): Response
     {
-        if(!$car){
+        if (!$car) {
             return $this->redirectToRoute('home');
         }
         return $this->render('car/detailCar.html.twig', [
@@ -36,8 +36,11 @@ class CarController extends AbstractController
     }
 
     #[Route('/deleteCar/{id}', name: 'deleteCar')]
-    public function deleteCar(EntityManagerInterface $manager, Car $car): Response
+    public function deleteCar(EntityManagerInterface $manager, Car $car = null): Response
     {
+        if(!$car) {
+            return $this->redirectToRoute('home');
+        }
         $repo = $manager->getRepository(Car::class);
         $manager->remove($car);
         $manager->flush();
@@ -47,8 +50,9 @@ class CarController extends AbstractController
     #[Route('/createCar', name: 'createCar')]
     public function createCar(
         EntityManagerInterface $manager,
-        Request $request
-    ): Response {
+        Request                $request
+    ): Response
+    {
         $form = $this->createForm(AddCarType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
